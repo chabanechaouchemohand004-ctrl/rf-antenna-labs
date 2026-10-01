@@ -1,0 +1,16 @@
+Array: N = 5, f0 = 770 MHz, d = 18.35 cm = 0.471 lambda0
+Chebyshev weights (edge = 1): [1.    1.609 1.932 1.609 1.   ]
+                    HPBW AF  HPBW FEKO   SLL AF  SLL AF*cos  SLL FEKO
+Uniform              22.06°     21.25°   -12.0 dB    -14.0 dB   -14.5 dB   (first null 25.1°)
+Chebyshev -20 dB     25.17°     24.13°   -20.0 dB    -22.5 dB   -23.0 dB   (first null 31.6°)
+
+E-plane horn (a = 22.86 mm, b1 = 140 mm, rho1 = 330 mm)
+    8.2 GHz  Balanis D_E =  13.2 dBi   FEKO gain = 14.9 dBi
+   10.0 GHz  Balanis D_E =  14.6 dBi   FEKO gain = 15.8 dBi
+   12.4 GHz  Balanis D_E =  16.0 dBi   FEKO gain = 16.7 dBi
+  19 dBi needs rho1 ≈ 82 λ (2.46 m) -> target not reachable with rho1 = 11 λ
+
+Pyramidal horn (a1 = 60.3 mm, b1 = 46.9 mm), D ≈ 0.51·4π·a1·b1/λ²
+  18.00 GHz  estimate =  18.2 dBi   FEKO = 18.9 dBi
+  22.25 GHz  estimate =  20.0 dBi   FEKO = 20.2 dBi
+  26.50 GHz  estimate =  21.5 dBi   FEKO = 20.9 dBi
