@@ -2,7 +2,7 @@
 
 Full-wave (MoM) simulation of microstrip patch arrays and waveguide horn antennas, checked against closed-form theory in Python.
 
-**Tools:** Altair FEKO (CADFEKO / POSTFEKO), Python (NumPy, SciPy, Matplotlib)  
+**Tools:** Altair FEKO (CADFEKO / POSTFEKO), Ansys HFSS (waveguide lab), Python (NumPy, SciPy, Matplotlib)  
 **Context:** M1 Systèmes Communicants lab work, Sorbonne Université (UM4EE205 Antennas, 2025–26)
 
 ---
@@ -68,6 +68,12 @@ cos(πx/a) variation along the wide side and nearly uniform along the narrow sid
 
 ---
 
+## 3. WR90 waveguide in HFSS
+
+Same WR-90 guide as the open-ended case above, simulated in Ansys HFSS and checked against an analytical Python model. HFSS and theory agree within 0.5 % on the TE10 and TE20 cutoffs, the guided wavelength and the attenuation at 10 GHz. Simulation only, no hardware. Details and limits: [`waveguides/`](waveguides/).
+
+---
+
 ## Repository
 
 ```
@@ -77,12 +83,17 @@ cos(πx/a) variation along the wide side and nearly uniform along the narrow sid
 ├── analysis/
 │   ├── theory_check.py   # array factor, Balanis horn directivity, aperture estimate
 │   └── output.txt        # script output (numbers used in the tables above)
+├── waveguides/
+│   ├── README.md         # WR90 HFSS lab: status, results, limitations
+│   ├── wr90_theory.py    # cutoffs, guided wavelength, conductor loss
+│   └── figures/          # HFSS screenshots and analytical plots
 └── figures/
 ```
 
 ```bash
 pip install -r requirements.txt
 cd analysis && python theory_check.py
+cd ../waveguides && python wr90_theory.py
 ```
 
 ## Limitations
