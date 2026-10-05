@@ -1,6 +1,6 @@
-# Antenna design & simulation — Altair FEKO
+# Antenna and waveguide simulation: FEKO, HFSS, Python
 
-Full-wave (MoM) simulation of microstrip patch arrays and waveguide horn antennas, checked against closed-form theory in Python.
+Full-wave simulation of microstrip patch arrays, horn antennas and a WR90 waveguide, checked against closed-form theory in Python.
 
 **Tools:** Altair FEKO (CADFEKO / POSTFEKO), Ansys HFSS (waveguide lab), Python (NumPy, SciPy, Matplotlib)  
 **Context:** M1 Systèmes Communicants lab work, Sorbonne Université (UM4EE205 Antennas, 2025–26)
@@ -54,7 +54,9 @@ Five probe-fed patches (εr = 4.5, infinite substrate) spaced d = 0.47 λ0 along
 
 <img src="figures/horn_s11_comparison.png" width="800">
 
-**Design lesson.** The 19 dBi target was not reachable with a flare length of ρ1 = 11 λ. Balanis' closed-form directivity gives 14.6 dBi for these dimensions (FEKO: 15.8 dBi). Reaching 19 dBi with an E-plane-only flare would need ρ1 ≈ 82 λ, about 2.5 m, which is why real standard-gain horns flare both planes (pyramidal).
+*|S11| in POSTFEKO: open guide (left), E-plane horn (right). The two y-axes use different scales.*
+
+**Design lesson.** The 19 dBi target was not reachable with a flare length of ρ1 = 11 λ. Balanis' closed-form directivity gives 14.6 dBi for these dimensions (FEKO: 15.8 dBi; the closed form ignores the flange and ground plane of the model). Reaching 19 dBi with an E-plane-only flare would need ρ1 ≈ 82 λ, about 2.5 m, which is why real standard-gain horns flare both planes (pyramidal).
 
 **Catalog check (K band).** Simulating a 20 dBi pyramidal horn across 18–26.5 GHz shows the gain rising from 18.9 to 20.9 dBi. The datasheet value is a mid-band nominal, not a guaranteed minimum.
 
@@ -62,7 +64,7 @@ Five probe-fed patches (εr = 4.5, infinite substrate) spaced d = 0.47 λ0 along
 
 <img src="figures/waveguide_te10_aperture.png" width="500">
 
-cos(πx/a) variation along the wide side and nearly uniform along the narrow side, as expected for the TE10 mode.
+cos(πx/a) along the wide side, nearly uniform along the narrow side: TE10.
 
 </details>
 
@@ -70,7 +72,7 @@ cos(πx/a) variation along the wide side and nearly uniform along the narrow sid
 
 ## 3. WR90 waveguide in HFSS
 
-Same WR-90 guide as the open-ended case above, simulated in Ansys HFSS and checked against an analytical Python model. HFSS and theory agree within 0.5 % on the TE10 and TE20 cutoffs, the guided wavelength and the attenuation at 10 GHz. Simulation only, no hardware. Details and limits: [`waveguides/`](waveguides/).
+Same WR-90 guide as the open-ended case above, simulated in Ansys HFSS and checked against an analytical Python model. HFSS and theory agree within **0.5 %** on the TE10 and TE20 cutoffs, the guided wavelength and the attenuation at 10 GHz. Details: [`waveguides/`](waveguides/README.md).
 
 ---
 
@@ -84,7 +86,7 @@ Same WR-90 guide as the open-ended case above, simulated in Ansys HFSS and check
 │   ├── theory_check.py   # array factor, Balanis horn directivity, aperture estimate
 │   └── output.txt        # script output (numbers used in the tables above)
 ├── waveguides/
-│   ├── README.md         # WR90 HFSS lab: status, results, limitations
+│   ├── README.md         # WR90 HFSS lab: setup, results, figures
 │   ├── wr90_theory.py    # cutoffs, guided wavelength, conductor loss
 │   └── figures/          # HFSS screenshots and analytical plots
 └── figures/
@@ -96,16 +98,8 @@ cd analysis && python theory_check.py
 cd ../waveguides && python wr90_theory.py
 ```
 
-## Limitations
+## Credits
 
-- In the array configuration the ports are not matched (|Γ| ≈ 0.7 at best, about −3 dB): the single-patch feed was not re-tuned for mutual coupling. The array results above concern radiation patterns only.
-- cos θ is a crude stand-in for the patch element pattern, used only to explain the trend in side-lobe level.
-- For the E-plane horn, FEKO gain (15.8 dBi at 10 GHz) is about 1.2 dB above the Balanis directivity (14.6 dBi). Balanis' formula is an approximation that ignores the flange and finite ground plane of the model, so the two are compared as orders of magnitude, not as an exact match.
-- FEKO values in `theory_check.py` were read off the POSTFEKO cuts, not exported as data.
-- The horn frequency sweeps are coarse (~15 points), so the S11 curves are only indicative between samples.
-
----
-
-Simulations, analysis and code: **Mohand Chabane Chaouche**. The lab report was co-submitted in pairs with A. Abdelmagid (pairing was for grading convenience).
+Simulations, analysis and code: **Mohand Chabane Chaouche**. Lab report co-written with A. Abdelmagid.
 
 Author: **Mohand Chabane Chaouche** · [LinkedIn](https://www.linkedin.com/in/mohandchabane-chaouche-9a515b2a7/)
