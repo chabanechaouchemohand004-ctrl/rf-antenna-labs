@@ -102,4 +102,4 @@ cd ../waveguides && python wr90_theory.py
 
 Simulations, analysis and code: **Mohand Chabane Chaouche**. Lab report co-written with A. Abdelmagid.
 
-Author: **Mohand Chabane Chaouche** · [LinkedIn](https://www.linkedin.com/in/mohandchabane-chaouche-9a515b2a7/)
+Author: **Mohand Chabane Chaouche** · [LinkedIn](https://www.linkedin.com/in/mohand-chabane-chaouche-9a515b2a7/)
